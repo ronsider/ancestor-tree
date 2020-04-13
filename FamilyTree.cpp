@@ -35,6 +35,28 @@ namespace family
         
      }
      
+     Tree relation(string name)const
+     {
+         
+     }
+     
+     Tree find(string relation)const
+     {
+         
+     }
+     
+     Tree remove(string name)
+     {
+         
+     }
+     
+     void display()const
+     {
+         
+     }
+     
+     
+     
     
      
 };
