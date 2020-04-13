@@ -17,5 +17,6 @@ namespace family
   void display() const;//const indicates read only function
   Tree relation(string name) const;//return the relation that correspond to this name and root
   Tree find(string s) const;//put name and get the relation
+   Tree remove(string name);//remove current family memeber and all his predessecors(avot)
  }
 }
