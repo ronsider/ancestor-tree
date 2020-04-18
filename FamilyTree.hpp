@@ -1,22 +1,40 @@
-#include <iostream>
 #include <string>
+
+using namespace std;
 
 namespace family
 {
 
- class Tree
- {
-   string _name;
-   Tree* father;
-   Tree* mother;
+class Tree
+{
+    string name;
+    Tree *mother, *father;
 
-  public:
-  Tree(string name);
-  Tree addFather(string son,string father);
-  Tree addMother(string son,string mother);
-  void display() const;//const indicates read only function
-  Tree relation(string name) const;//return the relation that correspond to this name and root
-  Tree find(string s) const;//put name and get the relation
-   Tree remove(string name);//remove current family memeber and all his predessecors(avot)
- }
-}
+public:
+    Tree(string n)
+    {
+        name = n;
+        father = nullptr;
+        mother = nullptr;
+    }
+
+    Tree &addFather(string son, string father);
+    Tree &addMother(string son, string mother);
+    string relation(string _name);
+    string find(string relation);
+    void display();
+    void printFamily(int num);
+    void remove(string _name);
+
+    ~Tree()//destructor 
+    {
+        if (father != nullptr)
+            delete father;
+        
+        if (mother != nullptr)
+            delete mother;
+        
+    }
+};
+
+} 
