@@ -1,32 +1,32 @@
-/*
+/*Date: April 2020
+ *
+ *
+ * 
  *Ron Sider
- *
- * Date: 2020-04
- *
  */
-#include "FamilyTree.hpp"
+
 #include <iostream>
-
-
-
 #include <algorithm>
+
+
+#include "FamilyTree.hpp"
 using namespace std;
 using namespace family;
 
 
 Tree &Tree::addFather(string son, string _father)
 {
-    if (name == son)
+    if (son == name)
     {
-        if (father == nullptr)
+        if (father == NULL)
         {
             father = new Tree(_father);
             return *this;
         }
         else
-            throw runtime_error(son + " father exist alreay!");
+            throw runtime_error(son + " father already exist!");
     }
-    else if (father != nullptr)
+    else if (father != NULL)
     {
         try
         {
@@ -35,6 +35,7 @@ Tree &Tree::addFather(string son, string _father)
         }
         catch (runtime_error &x)
         {
+
         };
     }
     if (mother != NULL)
@@ -45,22 +46,26 @@ Tree &Tree::addFather(string son, string _father)
         }
         catch (runtime_error &x)
         {
+
         };
-   
-    throw runtime_error(son + " no such son " + name);
+    
+    throw runtime_error(son + " no such entity: " + name);
 }
 
 Tree &Tree::addMother(string son, string _mother)
+
+
 {
-    if (name==son)
+    
+    if (son == name)
     {
-        if (mom == NULL)
+        if (mother == NULL)
         {
             mother = new Tree(_mother);
             return *this;
         }
         else
-            throw runtime_error(son + " already has a mother!");
+            throw runtime_error(son + " mother already exist!");
     }
     else if (mother != NULL)
     {
@@ -71,6 +76,7 @@ Tree &Tree::addMother(string son, string _mother)
         }
         catch (runtime_error &x)
         {
+
         };
     }
 
@@ -82,51 +88,61 @@ Tree &Tree::addMother(string son, string _mother)
         }
         catch (runtime_error &x)
         {
+
         };
 
     
-    throw runtime_error(son + " // not exist!");
+    throw runtime_error(son + " /// not exist!");
 }
 
-string Tree::relation(string _name)
+
+
+string Tree::relation(string relative)
 {
-    string ans = "unrelated";
+    string answer = "unrelated";
 
-    if (_name == name)
+    if (name==relative)
     {
-        ans = "me";
-        return ans;
+
+
+
+        answer = "me";
+        return answer;
+
+
     }
 
-    if (dad != NULL)
+    if (father != NULL)
     {
-        ans = dad->relation(_name);
 
-        if (ans != "unrelated")
+
+        answer = father->relation(relative);
+
+        if (answer != "unrelated")
         {
-            if (ans == "me")
-                ans = "father";
-            else if (ans == "father" || ans == "mother")
-                ans = "grand" + ans;
+            if (answer == "me")
+                answer = "father";
+            else if (answer == "father" || answer == "mother")
+                answer = "grand" + answer;
             else
-                ans = "great-" + ans;
+                answer = "great-" + answer;
         }
     }
-    if ((ans == "unrelated") && (mother != NULL))
+    if ((answer == "unrelated") && (mother != NULL))
     {
-        ans = mother->relation(_name);
+        answer = mother->relation(relative);
 
-        if (ans != "unrelated")
+        if (answer != "unrelated")
         {
-            if (ans == "me")
-                ans = "mother";
-            else if ((ans == "mother") || (ans == "father"))
-                ans = "grand" + ans;
+            if (answer == "me")
+                answer = "mother";
+            else if ((answer == "mother") || (answer == "father"))
+                answer = "grand" + answer;
             else
-                ans = "great-" + ans;
+                answer = "great-" + answer;
         }
     }
-    return ans;
+    return answer;
 }
 
 string Tree::find(string relation)
@@ -134,7 +150,7 @@ string Tree::find(string relation)
     if (relation == "me")
         return name;
     if (relation == "mother" && mother!=NULL)
-        return mom->name;
+        return mother->name;
     if (relation == "father" && father!=NULL)
         return father->name;
 
@@ -157,22 +173,69 @@ string Tree::find(string relation)
             catch(runtime_error &x){};
         
     }
-    throw runtime_error("The relation cant be treated: " + relation);
+    throw runtime_error("The tree cannot handle the: " + relation + " relation");
 }
 void Tree::display()
 {
     int num;
-    printFamily(num = 0);
+    ezer(num = 0);
 }
 
 
-void Tree::remove(string relative)//remove node according to relation paramater
+void Tree::remove(string relative)
 {
 
+    if (name == relative)
+    {
+        throw runtime_error(name + " can't be removed!");
+    }
+    if ((father != NULL) && (father->name == relative))
+    {
+        delete father;
+        father = NULL;
+        return;
+    }
+    else if (father != NULL){
+        try{
+            father->remove(relative);
+            return;
+        }
+        catch(runtime_error &x){};
+    }
+    if ((mother != NULL) && (mother->name == relative))
+    {
+
+        delete mother;
+        mother = NULL;
+        return;
+    }
+    else if (mother != NULL){
+        try{
+            mother->remove(relative);
+            return;
+        }
+        catch(runtime_error &x){};
+        
+    }
+    throw runtime_error(relative + " doesn't exist");
 
 
 }
-void Tree::printFamily(int num)
+void Tree::ezer(int num)
 {
-    
+    if (num == 0)
+        cout << "*************" << name << "'s Famiy:*************" << endl;
+
+    num += 10;
+
+    if (father != NULL)
+        father->ezer(num);
+
+    cout << endl;
+    for (int i = 10; i < num; i++)
+        cout << " ";
+    cout << name << "\n";
+
+    if (mother != NULL)
+        mother->ezer(num);
 }
