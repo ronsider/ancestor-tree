@@ -8,30 +8,31 @@ namespace family
 class Tree
 {
     string name;
-    Tree *mother, *father;
+    Tree *mother;
+    Tree *father;
 
 public:
     Tree(string n)
     {
         name = n;
-        father = nullptr;
-        mother = nullptr;
+        father = NULL;
+        mother = NULL;
     }
 
-    Tree &addFather(string son, string father);
-    Tree &addMother(string son, string mother);
-    string relation(string _name);
+    Tree &addFather(string son, string _father);
+    Tree &addMother(string son, string _mother);
+    string relation(string relative);
     string find(string relation);
     void display();
-    void printFamily(int num);
-    void remove(string _name);
+    void ezer(int num);//invoked by display
+    void remove(string relative);
 
-    ~Tree()//destructor 
+    ~Tree()//must use because of dynamic memory allocation
     {
-        if (father != nullptr)
+        if (father != NULL)
             delete father;
         
-        if (mother != nullptr)
+        if (mother != NULL)
             delete mother;
         
     }
