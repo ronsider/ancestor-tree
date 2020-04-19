@@ -1,241 +1,243 @@
-/*
+/*Date: April 2020
+ *
+ *
+ * 
  *Ron Sider
- *
- * Date: 2020-04
- *
  */
-#include "FamilyTree.hpp"
-#include <iostream>
-#include "doctest.h"
 
+
+#include "doctest.h"
+#include <iostream>
+
+#include "FamilyTree.hpp"
 using namespace family;
 using namespace std;
 
-
-TEST_CASE("check family")
+//first family
+TEST_CASE("check first group")
 {
-    family::Tree T1("ariel");
-    T1.addFather("ariel", "Adir")
-        .addMother("ariel", "Shelly")
+    family::Tree T1("didi");
+    T1.addFather("didi", "avi")
+        .addMother("didi", "linoy")
 
-        .addFather("Adir", "Ofir")
-        .addMother("Adir", "Maayan")
-        .addFather("Shelly", "Bar")
-        .addMother("Shelly", "Sapir")
+        .addFather("avi", "omri")
+        .addMother("avi", "may")
+        .addFather("linoy", "benny")
+        .addMother("linoy", "shiran")
 
-        .addFather("Ofir", "Gal")
-        .addMother("Ofir", "Talya")
-        .addFather("Maayan", "Shay")
-        .addMother("Maayan", "Sharon")
-        .addFather("Bar", "Lior")
-        .addMother("Bar", "Hadar")
-        .addFather("Sapir", "Dekel")
-        .addMother("Sapir", "Aviya")
+        .addFather("omri", "liran")
+        .addMother("omri", "tali")
+        .addFather("may", "shalom")
+        .addMother("may", "shirley")
+        .addFather("benny", "lidor")
+        .addMother("benny", "olga")
+        .addFather("shiran", "david")
+        .addMother("shiran", "aviva")
 
-        .addFather("Gal", "Avihai")
-        .addMother("Gal", "Nataly")
-        .addFather("Talya", "Yonatan")
-        .addMother("Talya", "Moriya")
-        .addFather("Shay", "Nimrod")
-        .addMother("Shay", "Tehila")
-        .addFather("Sharon", "Yoav")
-        .addMother("Sharon", "Shira")
-        .addFather("Lior", "Yarden")
-        .addMother("Lior", "Hila")
-        .addFather("Hadar", "Shimon")
-        .addMother("Hadar", "Stav")
-        .addFather("Dekel", "Netanel")
-        .addMother("Dekel", "Aviv")
-        .addFather("Aviya", "Eliav")
-        .addMother("Aviya", "Rivka");
+        .addFather("liran", "chai")
+        .addMother("liran", "netta")
+        .addFather("tali", "yona")
+        .addMother("tali", "yamit")
+        .addFather("shalom", "nir")
+        .addMother("shalom", "tzipi")
+        .addFather("shirley", "yossi")
+        .addMother("shirley", "shani")
+        .addFather("lidor", "yaara")
+        .addMother("lidor", "alina")
+        .addFather("olga", "shimshon")
+        .addMother("olga", "tammar")
+        .addFather("david", "daniel")
+        .addMother("david", "videl")
+        .addFather("aviva", "shmulik")
+        .addMother("aviva", "sapir");
 
     T1.display();
 
-    CHECK(T1.relation("ariel") == "me");
-    CHECK(T1.relation("Adir") == "father");
-    CHECK(T1.relation("Shelly") == "mother");
+    CHECK(T1.relation("didi") == "me");
+    CHECK(T1.relation("avi") == "father");
+    CHECK(T1.relation("linoy") == "mother");
 
-    CHECK(T1.relation("Bar") == "grandfather");
-    CHECK(T1.relation("Sapir") == "grandmother");
-    CHECK(T1.relation("Ofir") == "grandfather");
-    CHECK(T1.relation("Maayan") == "grandmother");
+    CHECK(T1.relation("benny") == "grandfather");
+    CHECK(T1.relation("shiran") == "grandmother");
+    CHECK(T1.relation("omri") == "grandfather");
+    CHECK(T1.relation("may") == "grandmother");
 
-    CHECK(T1.relation("Gal") == "great-grandfather");
-    CHECK(T1.relation("Talya") == "great-grandmother");
-    CHECK(T1.relation("Shay") == "great-grandfather");
-    CHECK(T1.relation("Sharon") == "great-grandmother");
-    CHECK(T1.relation("Lior") == "great-grandfather");
-    CHECK(T1.relation("Hadar") == "great-grandmother");
-    CHECK(T1.relation("Dekel") == "great-grandfather");
-    CHECK(T1.relation("Aviya") == "great-grandmother");
+    CHECK(T1.relation("liran") == "great-grandfather");
+    CHECK(T1.relation("tali") == "great-grandmother");
+    CHECK(T1.relation("shalom") == "great-grandfather");
+    CHECK(T1.relation("shirley") == "great-grandmother");
+    CHECK(T1.relation("lidor") == "great-grandfather");
+    CHECK(T1.relation("olga") == "great-grandmother");
+    CHECK(T1.relation("david") == "great-grandfather");
+    CHECK(T1.relation("aviva") == "great-grandmother");
 
-    CHECK(T1.relation("Avihai") == "great-great-grandfather");
-    CHECK(T1.relation("Nataly") == "great-great-grandmother");
-    CHECK(T1.relation("Yonatan") == "great-great-grandfather");
-    CHECK(T1.relation("Moriya") == "great-great-grandmother");
-    CHECK(T1.relation("Nimrod") == "great-great-grandfather");
-    CHECK(T1.relation("Tehila") == "great-great-grandmother");
-    CHECK(T1.relation("Yoav") == "great-great-grandfather");
-    CHECK(T1.relation("Shira") == "great-great-grandmother");
-    CHECK(T1.relation("Yarden") == "great-great-grandfather");
-    CHECK(T1.relation("Hila") == "great-great-grandmother");
-    CHECK(T1.relation("Shimon") == "great-great-grandfather");
-    CHECK(T1.relation("Stav") == "great-great-grandmother");
-    CHECK(T1.relation("Netanel") == "great-great-grandfather");
-    CHECK(T1.relation("Aviv") == "great-great-grandmother");
-    CHECK(T1.relation("Eliav") == "great-great-grandfather");
-    CHECK(T1.relation("Rivka") == "great-great-grandmother");
+    CHECK(T1.relation("chai") == "great-great-grandfather");
+    CHECK(T1.relation("netta") == "great-great-grandmother");
+    CHECK(T1.relation("yona") == "great-great-grandfather");
+    CHECK(T1.relation("yamit") == "great-great-grandmother");
+    CHECK(T1.relation("nir") == "great-great-grandfather");
+    CHECK(T1.relation("tzipi") == "great-great-grandmother");
+    CHECK(T1.relation("yossi") == "great-great-grandfather");
+    CHECK(T1.relation("alina") == "great-great-grandmother");
+    CHECK(T1.relation("yaara") == "great-great-grandfather");
+    CHECK(T1.relation("alina") == "great-great-grandmother");
+    CHECK(T1.relation("shimshon") == "great-great-grandfather");
+    CHECK(T1.relation("tammar") == "great-great-grandmother");
+    CHECK(T1.relation("daniel") == "great-great-grandfather");
+    CHECK(T1.relation("videl") == "great-great-grandmother");
+    CHECK(T1.relation("shmulik") == "great-great-grandfather");
+    CHECK(T1.relation("sapir") == "great-great-grandmother");
 
-    CHECK(T1.relation("Yossef") == "unrelated");
+    CHECK(T1.relation("jossef") == "unrelated");
 
-    T1.remove("Gal");
-    CHECK(T1.relation("Gal") == "unrelated");
-    CHECK(T1.relation("Avihai") == "unrelated");
-    CHECK(T1.relation("Nataly") == "unrelated");
+    T1.remove("liran");
+    CHECK(T1.relation("liran") == "unrelated");
+    CHECK(T1.relation("chai") == "unrelated");
+    CHECK(T1.relation("netta") == "unrelated");
 
-    T1.remove("Talya");
-    CHECK(T1.relation("Yonatan") == "unrelated");
-    CHECK(T1.relation("Moriya") == "unrelated");
+    T1.remove("tali");
+    CHECK(T1.relation("yona") == "unrelated");
+    CHECK(T1.relation("yamit") == "unrelated");
 
-    T1.remove("Shay");
-    CHECK(T1.relation("Nimrod") == "unrelated");
-    CHECK(T1.relation("Tehila") == "unrelated");
+    T1.remove("shalom");
+    CHECK(T1.relation("nir") == "unrelated");
+    CHECK(T1.relation("tzipi") == "unrelated");
 
-    T1.remove("Sharon");
-    CHECK(T1.relation("Yoav") == "unrelated");
-    CHECK(T1.relation("Shira") == "unrelated");
+    T1.remove("shirley");
+    CHECK(T1.relation("yossi") == "unrelated");
+    CHECK(T1.relation("shani") == "unrelated");
 
-    T1.remove("Lior");
-    CHECK(T1.relation("Yarden") == "unrelated");
-    CHECK(T1.relation("Hila") == "unrelated");
+    T1.remove("lidor");
+    CHECK(T1.relation("yaara") == "unrelated");
+    CHECK(T1.relation("alina") == "unrelated");
 
-    T1.remove("Hadar");
-    CHECK(T1.relation("Shimon") == "unrelated");
-    CHECK(T1.relation("Stav") == "unrelated");
+    T1.remove("olga");
+    CHECK(T1.relation("shimshon") == "unrelated");
+    CHECK(T1.relation("tammar") == "unrelated");
 
-    T1.remove("Dekel");
-    CHECK(T1.relation("Netanel") == "unrelated");
-    CHECK(T1.relation("Aviv") == "unrelated");
+    T1.remove("david");
+    CHECK(T1.relation("daniel") == "unrelated");
+    CHECK(T1.relation("videl") == "unrelated");
 
-    T1.remove("Aviya");
-    CHECK(T1.relation("Eliav") == "unrelated");
-    CHECK(T1.relation("Rivka") == "unrelated");
+    T1.remove("aviva");
+    CHECK(T1.relation("shmulik") == "unrelated");
+    CHECK(T1.relation("sapir") == "unrelated");
 
-    CHECK(T1.find("me") == "ariel");
-    CHECK(T1.find("mother") == "Shelly");
-    CHECK(T1.find("father") == "Adir");
+    CHECK(T1.find("me") == "didi");
+    CHECK(T1.find("mother") == "linoy");
+    CHECK(T1.find("father") == "avi");
 }
-//***************Second family***************
-TEST_CASE("Check the correctness of relations -second family")
+//second family
+TEST_CASE("check second family")
 {
-    family::Tree T2("Avital");
-    T2.addFather("Avital", "Niv")
-        .addMother("Avital", "Liya")
+    family::Tree T2("tal");
+    T2.addFather("tal", "ziv")
+        .addMother("tal", "liat")
 
-        .addFather("Liya", "Elad")
-        .addMother("Liya", "Dana")
-        .addFather("Niv", "Liad")
-        .addMother("Niv", "Yasmin")
+        .addFather("liat", "menachem")
+        .addMother("liat", "daniela")
+        .addFather("ziv", "daniel")
+        .addMother("ziv", "yifat")
 
-        .addFather("Elad", "Evyatar")
-        .addMother("Elad", "Liel")
-        .addFather("Dana", "Asif")
-        .addMother("Dana", "Shaked")
-        .addFather("Liad", "Gadi")
-        .addMother("Liad", "Odelya")
-        .addFather("Yasmin", "Adam")
-        .addMother("Yasmin", "Eliraz")
+        .addFather("menachem", "avihu")
+        .addMother("menachem", "lihi")
+        .addFather("daniela", "assaf")
+        .addMother("daniela", "dorin")
+        .addFather("daniel", "yagel")
+        .addMother("daniel", "koral")
+        .addFather("yifat", "noam")
+        .addMother("yifat", "shlomi")
 
-        .addFather("Evyatar", "Naor")
-        .addMother("Evyatar", "Hagar")
-        .addFather("Liel", "Chen")
-        .addMother("Liel", "Mor")
-        .addFather("Asif", "Roee")
-        .addMother("Asif", "Topaz")
-        .addFather("Shaked", "Liron")
-        .addMother("Shaked", "Michal")
-        .addFather("Gadi", "Raz")
-        .addMother("Gadi", "Lital")
-        .addFather("Odelya", "Omer")
-        .addMother("Odelya", "Nitzan")
-        .addFather("Adam", "Idan")
-        .addMother("Adam", "Keren")
-        .addFather("Eliraz", "Ben")
-        .addMother("Eliraz", "Reut");
+        .addFather("avihu", "alon")
+        .addMother("avihu", "hilla")
+        .addFather("lihi", "cedrick")
+        .addMother("lihi", "limor")
+        .addFather("assaf", "ofek")
+        .addMother("assaf", "liora")
+        .addFather("dorin", "ronel")
+        .addMother("dorin", "priel")
+        .addFather("yagel", "yoel")
+        .addMother("yagel", "naama")
+        .addFather("koral", "din")
+        .addMother("koral", "ariella")
+        .addFather("noam", "snir")
+        .addMother("noam", "amit")
+        .addFather("shlomi", "yehuda")
+        .addMother("shlomi", "lin");
 
     T2.display();
 
-    CHECK(T2.relation("Avital") == "me");
-    CHECK(T2.relation("Niv") == "father");
-    CHECK(T2.relation("Liya") == "mother");
+    CHECK(T2.relation("tal") == "me");
+    CHECK(T2.relation("ziv") == "father");
+    CHECK(T2.relation("liat") == "mother");
 
-    CHECK(T2.relation("Elad") == "grandfather");
-    CHECK(T2.relation("Dana") == "grandmother");
-    CHECK(T2.relation("Liad") == "grandfather");
-    CHECK(T2.relation("Yasmin") == "grandmother");
+    CHECK(T2.relation("menachem") == "grandfather");
+    CHECK(T2.relation("daniela") == "grandmother");
+    CHECK(T2.relation("daniel") == "grandfather");
+    CHECK(T2.relation("yifat") == "grandmother");
 
-    CHECK(T2.relation("Evyatar") == "great-grandfather");
-    CHECK(T2.relation("Liel") == "great-grandmother");
-    CHECK(T2.relation("Asif") == "great-grandfather");
-    CHECK(T2.relation("Shaked") == "great-grandmother");
-    CHECK(T2.relation("Gadi") == "great-grandfather");
-    CHECK(T2.relation("Odelya") == "great-grandmother");
-    CHECK(T2.relation("Adam") == "great-grandfather");
-    CHECK(T2.relation("Eliraz") == "great-grandmother");
+    CHECK(T2.relation("avihu") == "great-grandfather");
+    CHECK(T2.relation("lihi") == "great-grandmother");
+    CHECK(T2.relation("assaf") == "great-grandfather");
+    CHECK(T2.relation("dorin") == "great-grandmother");
+    CHECK(T2.relation("yagel") == "great-grandfather");
+    CHECK(T2.relation("koral") == "great-grandmother");
+    CHECK(T2.relation("noam") == "great-grandfather");
+    CHECK(T2.relation("shlomi") == "great-grandmother");
 
-    CHECK(T2.relation("Naor") == "great-great-grandfather");
-    CHECK(T2.relation("Hagar") == "great-great-grandmother");
-    CHECK(T2.relation("Chen") == "great-great-grandfather");
-    CHECK(T2.relation("Mor") == "great-great-grandmother");
-    CHECK(T2.relation("Roee") == "great-great-grandfather");
-    CHECK(T2.relation("Topaz") == "great-great-grandmother");
-    CHECK(T2.relation("Liron") == "great-great-grandfather");
-    CHECK(T2.relation("Michal") == "great-great-grandmother");
-    CHECK(T2.relation("Raz") == "great-great-grandfather");
-    CHECK(T2.relation("Lital") == "great-great-grandmother");
-    CHECK(T2.relation("Omer") == "great-great-grandfather");
-    CHECK(T2.relation("Nitzan") == "great-great-grandmother");
-    CHECK(T2.relation("Idan") == "great-great-grandfather");
-    CHECK(T2.relation("Keren") == "great-great-grandmother");
-    CHECK(T2.relation("Ben") == "great-great-grandfather");
-    CHECK(T2.relation("Reut") == "great-great-grandmother");
+    CHECK(T2.relation("alon") == "great-great-grandfather");
+    CHECK(T2.relation("hilla") == "great-great-grandmother");
+    CHECK(T2.relation("cedrick") == "great-great-grandfather");
+    CHECK(T2.relation("limor") == "great-great-grandmother");
+    CHECK(T2.relation("ofek") == "great-great-grandfather");
+    CHECK(T2.relation("liora") == "great-great-grandmother");
+    CHECK(T2.relation("ronel") == "great-great-grandfather");
+    CHECK(T2.relation("priel") == "great-great-grandmother");
+    CHECK(T2.relation("yoel") == "great-great-grandfather");
+    CHECK(T2.relation("naama") == "great-great-grandmother");
+    CHECK(T2.relation("din") == "great-great-grandfather");
+    CHECK(T2.relation("ariella") == "great-great-grandmother");
+    CHECK(T2.relation("snir") == "great-great-grandfather");
+    CHECK(T2.relation("amit") == "great-great-grandmother");
+    CHECK(T2.relation("yehuda") == "great-great-grandfather");
+    CHECK(T2.relation("lin") == "great-great-grandmother");
 
-    CHECK(T2.relation("Itzhak") == "unrelated");
+    CHECK(T2.relation("mendale") == "unrelated");
 
-    T2.remove("Eliraz");
-    CHECK(T2.relation("Eliraz") == "unrelated");
-    CHECK(T2.relation("Ben") == "unrelated");
-    CHECK(T2.relation("Reut") == "unrelated");
+    T2.remove("shlomi");
+    CHECK(T2.relation("shlomi") == "unrelated");
+    CHECK(T2.relation("yehuda") == "unrelated");
+    CHECK(T2.relation("lin") == "unrelated");
 
-    T2.remove("Evyatar");
-    CHECK(T2.relation("Naor") == "unrelated");
-    CHECK(T2.relation("Hagar") == "unrelated");
+    T2.remove("avihu");
+    CHECK(T2.relation("alon") == "unrelated");
+    CHECK(T2.relation("hilla") == "unrelated");
 
-    T2.remove("Liel");
-    CHECK(T2.relation("Chen") == "unrelated");
-    CHECK(T2.relation("Mor") == "unrelated");
+    T2.remove("lihi");
+    CHECK(T2.relation("cerdick") == "unrelated");
+    CHECK(T2.relation("limor") == "unrelated");
 
-    T2.remove("Asif");
-    CHECK(T2.relation("Roee") == "unrelated");
-    CHECK(T2.relation("Topaz") == "unrelated");
+    T2.remove("assaf");
+    CHECK(T2.relation("ofek") == "unrelated");
+    CHECK(T2.relation("liora") == "unrelated");
 
-    T2.remove("Shaked");
-    CHECK(T2.relation("Liron") == "unrelated");
-    CHECK(T2.relation("Michal") == "unrelated");
+    T2.remove("dorin");
+    CHECK(T2.relation("ronel") == "unrelated");
+    CHECK(T2.relation("priel") == "unrelated");
 
-    T2.remove("Gadi");
-    CHECK(T2.relation("Raz") == "unrelated");
-    CHECK(T2.relation("Lital") == "unrelated");
+    T2.remove("yagel");
+    CHECK(T2.relation("yoel") == "unrelated");
+    CHECK(T2.relation("naama") == "unrelated");
 
-    T2.remove("Odelya");
-    CHECK(T2.relation("Omer") == "unrelated");
-    CHECK(T2.relation("Nitzan") == "unrelated");
+    T2.remove("koral");
+    CHECK(T2.relation("din") == "unrelated");
+    CHECK(T2.relation("ariella") == "unrelated");
 
-    T2.remove("Adam");
-    CHECK(T2.relation("Idan") == "unrelated");
-    CHECK(T2.relation("Keren") == "unrelated");
+    T2.remove("noam");
+    CHECK(T2.relation("snir") == "unrelated");
+    CHECK(T2.relation("amit") == "unrelated");
 
-    CHECK(T2.find("me") == "Avital");
-    CHECK(T2.find("mother") == "Liya");
-    CHECK(T2.find("father") == "Niv");
+    CHECK(T2.find("me") == "tal");
+    CHECK(T2.find("mother") == "liat");
+    CHECK(T2.find("father") == "ziv");
 }
