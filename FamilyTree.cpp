@@ -121,10 +121,15 @@ string Tree::relation(string relative)
         if (answer != "unrelated")
         {
             if (answer == "me")
+                
                 answer = "father";
+            
             else if (answer == "father" || answer == "mother")
+                
                 answer = "grand" + answer;
+            
             else
+                
                 answer = "great-" + answer;
         }
     }
@@ -149,10 +154,14 @@ string Tree::find(string relation)
 {
     if (relation == "me")
         return name;
-    if (relation == "mother" && mother!=NULL)
-        return mother->name;
+    
     if (relation == "father" && father!=NULL)
         return father->name;
+    
+    
+    if (relation == "mother" && mother!=NULL)
+        return mother->name;
+    
 
     if (relation.at(0) == 'g')
     {
@@ -193,10 +202,12 @@ void Tree::remove(string relative)
     {
         delete father;
         father = NULL;
-        return;
+        return;//used to break from function
     }
-    else if (father != NULL){
-        try{
+    else if (father != NULL)
+    {
+        try
+        {
             father->remove(relative);
             return;
         }
@@ -209,8 +220,10 @@ void Tree::remove(string relative)
         mother = NULL;
         return;
     }
-    else if (mother != NULL){
-        try{
+    else if (mother != NULL)
+    {
+        try
+        {
             mother->remove(relative);
             return;
         }
@@ -221,21 +234,28 @@ void Tree::remove(string relative)
 
 
 }
-void Tree::ezer(int num)
+void Tree::ezer(int number)//helps displaying the tree in a friendly display manner
 {
-    if (num == 0)
+    if (number == 0)
         cout << "*************" << name << "'s Famiy:*************" << endl;
 
-    num += 10;
+    number += 10;
 
     if (father != NULL)
-        father->ezer(num);
+        
+        
+        father->ezer(number);
 
     cout << endl;
-    for (int i = 10; i < num; i++)
+    
+    
+    
+    for (int i = 10; i < number; i++)
         cout << " ";
     cout << name << "\n";
 
     if (mother != NULL)
-        mother->ezer(num);
+        
+        
+        mother->ezer(number);
 }
